@@ -12,6 +12,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
 var _webpack = require('webpack');
 
 var _webpack2 = _interopRequireDefault(_webpack);
@@ -37,5 +41,11 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('/', function (req, res) {
   res.sendFile(indexPath);
 });
+
+app.get('/api/test', function (req, res) {
+  return res.send({ status: 200 });
+});
+
+app.use((0, _cors2.default)());
 
 exports.default = app;

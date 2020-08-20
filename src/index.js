@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App';
+import App from './components/App/dashboard';
 
 ReactDOM.render(
   <App />,
@@ -8,9 +8,9 @@ ReactDOM.render(
 );
 
 
-if(process.env.NODE_ENV == 'development' && module.hot) {
-    module.hot.accept('./components/App/App', () => {
-        const NewApp = require('./components/App/App').default;
-        ReactDOM.render(<NewApp />, document.getElementById('root'));
-    });
+if (process.env.NODE_ENV == 'development' && module.hot) {
+  module.hot.accept('./components/App/dashboard', () => {
+    const NewApp = require('./components/App/dashboard').default;
+    ReactDOM.render(<NewApp />, document.getElementById('root'));
+  });
 }
