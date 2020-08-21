@@ -3,7 +3,7 @@ var path = require('path');
 var HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
+  template: "./src/client/index.html",
   filename: "index.html",
   inject: 'body'
 });
@@ -14,7 +14,7 @@ module.exports = {
   entry: {
     index: [
       "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000",
-      path.resolve(__dirname, './src/index.js')
+      path.resolve(__dirname, './src/client/index.js')
     ]
   },
   mode: 'development',
@@ -28,16 +28,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['babel-loader']
-      },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     "style-loader", // creates style nodes from JS strings
-      //     "css-loader", // translates CSS into CommonJS
-      //     "sass-loader" // compiles Sass to CSS
-      //   ]
-      // }
+      }
     ]
+  },
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

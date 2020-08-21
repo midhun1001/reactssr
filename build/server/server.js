@@ -12,10 +12,6 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _cors = require('cors');
-
-var _cors2 = _interopRequireDefault(_cors);
-
 var _webpack = require('webpack');
 
 var _webpack2 = _interopRequireDefault(_webpack);
@@ -23,6 +19,10 @@ var _webpack2 = _interopRequireDefault(_webpack);
 var _webpack3 = require('../../webpack.config');
 
 var _webpack4 = _interopRequireDefault(_webpack3);
+
+var _nodeFetch = require('node-fetch');
+
+var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,9 +43,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api/test', function (req, res) {
-  return res.send({ status: 200 });
+  (0, _nodeFetch2.default)("http://dummy.restapiexample.com/api/v1/employees").then(function (res) {
+    return res.json();
+  }).then(function (data) {
+    res.send({ data: data });
+  }).catch(function (err) {
+    res.send(err);
+  });
 });
-
-app.use((0, _cors2.default)());
 
 exports.default = app;

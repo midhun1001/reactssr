@@ -1,8 +1,8 @@
 import path from 'path';
 import express from 'express';
-import cors from 'cors';
 import webpack from 'webpack';
 import config from '../../webpack.config';
+import fetch from 'node-fetch';
 
 const app = express();
 
@@ -21,10 +21,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-  return res.send({ status: 200 });
+  fetch("http://dummy.restapiexample.com/api/v1/employees")
+    .then(res => res.json())
+    .then(data => {
+      res.send({ data });
+    })
+    .catch(err => {
+      res.send(err);
+    });
 });
-
-app.use(cors());
 
 
 export default app;

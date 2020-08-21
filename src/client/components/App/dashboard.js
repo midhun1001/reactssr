@@ -1,4 +1,9 @@
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: block;
+`;
 
 class Dashboard extends PureComponent {
   componentDidMount() {
@@ -13,7 +18,7 @@ class Dashboard extends PureComponent {
   }
   render() {
     return (
-      <div>Dashboard</div>
+      <Container>midhun</Container>
     );
   }
 }
